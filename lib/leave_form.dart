@@ -5,10 +5,11 @@ class LeaveForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode descriptionFocusNode = FocusNode();
     TextEditingController _dateController =
         TextEditingController(); // Controller for date field
 
-    Future<void> _selectDate(BuildContext context) async {
+    Future<void> selectDate(BuildContext context) async {
       // Get the current date
       DateTime currentDate = DateTime.now();
       // Show the date picker dialog
@@ -33,99 +34,110 @@ class LeaveForm extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.teal),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 10.0, right: 10, top: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DropdownMenu<String>(
-                  width: 200,
-                  hintText: "Leave Type",
-                  onSelected: (value) {},
-                  dropdownMenuEntries: const [
-                    DropdownMenuEntry(value: "id", label: "Casual"),
-                    DropdownMenuEntry(value: "id", label: "Sick"),
-                    DropdownMenuEntry(value: "id", label: "Previlege"),
-                  ],
-                ),
-                DropdownMenu<String>(
-                  width: 200,
-                  hintText: "Leave Mode",
-                  onSelected: (value) {},
-                  dropdownMenuEntries: const [
-                    DropdownMenuEntry(value: "half", label: "Half"),
-                    DropdownMenuEntry(value: "full", label: "Full"),
-                    DropdownMenuEntry(
-                        value: "compensatory", label: "Compensatory"),
-                  ],
-                ),
-              ],
-            ),
-
-            // Leave Mode Section
-            const SizedBox(height: 10),
-
-            const Divider(),
-            // Date Field Section
-            const SizedBox(height: 10),
-
-            GestureDetector(
-                onTap: () => _selectDate(context), // Open date picker on tap
-                child: AbsorbPointer(
-                    // Prevent typing in the field
-                    child: TextField(
-                        controller: _dateController, // Set the date controller
-                        decoration: const InputDecoration(
-                          hintText: "Select Dates",
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
-                        )))),
-            ListTile(
-              leading: Checkbox.adaptive(value: false, onChanged: (value) {}),
-              title: const Text(
-                "Half Day",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(left: 15.0, right: 15, top: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DropdownMenu<String>(
+                width: 200,
+                hintText: "Leave Type",
+                onSelected: (value) {},
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(value: "id", label: "Casual"),
+                  DropdownMenuEntry(value: "id", label: "Sick"),
+                  DropdownMenuEntry(value: "id", label: "Previlege"),
+                ],
               ),
-            ),
+              const SizedBox(height: 10),
 
-            const Divider(),
-            const Text(
-              "Days : ",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const Divider(),
-            // Description Section
-            const SizedBox(height: 20),
-            const Text(
-              "Description",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const TextField(
-              maxLines: 8,
-              decoration: InputDecoration(
-                hintText: "Enter a description (optional)",
-                border: OutlineInputBorder(),
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              const Divider(),
+              // Date Field Section
+              const SizedBox(height: 10),
+
+              DropdownMenu<String>(
+                width: 200,
+                hintText: "Leave Mode",
+                onSelected: (value) {},
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(value: "half", label: "Half"),
+                  DropdownMenuEntry(value: "full", label: "Full"),
+                  DropdownMenuEntry(
+                      value: "compensatory", label: "Compensatory"),
+                ],
               ),
-            ),
 
-            Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.teal),
-                      onPressed: () {},
-                      child: const Text("Apply")),
-                )),
-          ],
+              // Leave Mode Section
+              const SizedBox(height: 10),
+
+              const Divider(),
+              // Date Field Section
+              const SizedBox(height: 10),
+
+              // AbsorbPointer(
+
+              //     child:
+              TextField(
+                controller: _dateController, // Set the date controller
+                readOnly: true,
+                decoration: const InputDecoration(
+                  hintText: "Select Dates",
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                ),
+                onTap: () async {
+                  await selectDate(context);
+                },
+              ),
+              ListTile(
+                leading: Checkbox.adaptive(value: false, onChanged: (value) {}),
+                title: const Text(
+                  "Half Day",
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                ),
+              ),
+
+              const Divider(),
+              const Text(
+                "Days : ",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const Divider(),
+              // Description Section
+              const SizedBox(height: 20),
+              // const Text(
+              //   "Description",
+              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              // ),
+              TextField(
+                focusNode: descriptionFocusNode,
+                maxLines: 8,
+                decoration: const InputDecoration(
+                  hintText: "Reason",
+                  border: OutlineInputBorder(),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                ),
+              ),
+
+              Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.teal),
+                        onPressed: () {},
+                        child: const Text("Apply")),
+                  )),
+            ],
+          ),
         ),
       ),
       /* Container(
