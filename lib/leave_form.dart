@@ -38,15 +38,12 @@ class LeaveForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Leave Type Section
-            const Text(
-              "Leave Type",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DropdownMenu<String>(
+                  width: 200,
+                  hintText: "Leave Type",
                   onSelected: (value) {},
                   dropdownMenuEntries: const [
                     DropdownMenuEntry(value: "id", label: "Casual"),
@@ -54,32 +51,26 @@ class LeaveForm extends StatelessWidget {
                     DropdownMenuEntry(value: "id", label: "Previlege"),
                   ],
                 ),
+                DropdownMenu<String>(
+                  width: 200,
+                  hintText: "Leave Mode",
+                  onSelected: (value) {},
+                  dropdownMenuEntries: const [
+                    DropdownMenuEntry(value: "half", label: "Half"),
+                    DropdownMenuEntry(value: "full", label: "Full"),
+                    DropdownMenuEntry(
+                        value: "compensatory", label: "Compensatory"),
+                  ],
+                ),
               ],
             ),
-            const Divider(),
 
             // Leave Mode Section
             const SizedBox(height: 10),
-            const Text(
-              "Leave Mode",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            DropdownMenu<String>(
-              onSelected: (value) {},
-              dropdownMenuEntries: const [
-                DropdownMenuEntry(value: "half", label: "Half"),
-                DropdownMenuEntry(value: "full", label: "Full"),
-                DropdownMenuEntry(value: "compensatory", label: "Compensatory"),
-              ],
-            ),
 
             const Divider(),
             // Date Field Section
             const SizedBox(height: 10),
-            const Text(
-              "Date",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
 
             GestureDetector(
                 onTap: () => _selectDate(context), // Open date picker on tap
@@ -88,7 +79,7 @@ class LeaveForm extends StatelessWidget {
                     child: TextField(
                         controller: _dateController, // Set the date controller
                         decoration: const InputDecoration(
-                          hintText: "Select date",
+                          hintText: "Select Dates",
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
@@ -100,16 +91,7 @@ class LeaveForm extends StatelessWidget {
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
               ),
             ),
-            // ExpansionTile(
-            //     title: const Text(
-            //       "Half Day",
-            //       style: TextStyle(fontWeight: FontWeight.bold),
-            //     ),
-            //     leading: Checkbox.adaptive(value: false, onChanged: (value) {}),
-            //     children: [
-            //       const Text("From"),
-            //       const Text("To"),
-            //     ]),
+
             const Divider(),
             const Text(
               "Days : ",
@@ -123,7 +105,7 @@ class LeaveForm extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const TextField(
-              maxLines: 5,
+              maxLines: 8,
               decoration: InputDecoration(
                 hintText: "Enter a description (optional)",
                 border: OutlineInputBorder(),
