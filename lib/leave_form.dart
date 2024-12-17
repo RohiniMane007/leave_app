@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum LeaveMode { half, full, both }
+
 class LeaveForm extends StatelessWidget {
   const LeaveForm({super.key});
 
@@ -44,7 +46,7 @@ class LeaveForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DropdownMenu<String>(
-                width: 200,
+                width: 330,
                 hintText: "Leave Type",
                 onSelected: (value) {},
                 dropdownMenuEntries: const [
@@ -59,16 +61,22 @@ class LeaveForm extends StatelessWidget {
               // Date Field Section
               const SizedBox(height: 10),
 
-              DropdownMenu<String>(
-                width: 200,
-                hintText: "Leave Mode",
-                onSelected: (value) {},
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(value: "half", label: "Half"),
-                  DropdownMenuEntry(value: "full", label: "Full"),
-                  DropdownMenuEntry(
-                      value: "compensatory", label: "Compensatory"),
-                ],
+              SizedBox(
+                width: 330,
+                child: SegmentedButton<LeaveMode>(
+                  segments: const <ButtonSegment<LeaveMode>>[
+                    ButtonSegment(value: LeaveMode.half, label: Text('Half')),
+                    ButtonSegment(value: LeaveMode.full, label: Text('Full')),
+                    ButtonSegment(value: LeaveMode.both, label: Text('Both')),
+                  ],
+                  selected: const <LeaveMode>{LeaveMode.half},
+                  onSelectionChanged: (Set newSelection) {
+                    // setState(() {
+                    //   selection = newSelection;
+                    // });
+                  },
+                  multiSelectionEnabled: true,
+                ),
               ),
 
               // Leave Mode Section
