@@ -116,12 +116,9 @@ class LeaveForm extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const Divider(),
-              // Description Section
+
               const SizedBox(height: 20),
-              // const Text(
-              //   "Description",
-              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              // ),
+
               TextField(
                 focusNode: descriptionFocusNode,
                 maxLines: 8,
