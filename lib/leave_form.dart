@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 enum LeaveMode { half, full, both }
 
@@ -141,6 +142,19 @@ class LeaveForm extends StatelessWidget {
                             backgroundColor: Colors.teal),
                         onPressed: () {},
                         child: const Text("Apply")),
+                  )),
+              Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.teal),
+                        onPressed: () {
+                          context.go('/');
+                        },
+                        child: const Text("Back")),
                   )),
             ],
           ),
