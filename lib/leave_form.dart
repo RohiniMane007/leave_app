@@ -67,7 +67,8 @@ class LeaveForm extends StatelessWidget {
                   segments: const <ButtonSegment<LeaveMode>>[
                     ButtonSegment(value: LeaveMode.half, label: Text('Half')),
                     ButtonSegment(value: LeaveMode.full, label: Text('Full')),
-                    ButtonSegment(value: LeaveMode.both, label: Text('Both')),
+                    ButtonSegment(
+                        value: LeaveMode.both, label: Text('Combination')),
                   ],
                   selected: const <LeaveMode>{LeaveMode.half},
                   onSelectionChanged: (Set newSelection) {
