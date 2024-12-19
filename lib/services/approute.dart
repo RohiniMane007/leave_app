@@ -15,20 +15,20 @@ class AppRoute {
         },
         routes: <RouteBase>[
           GoRoute(
-              path: 'form',
+              path: '/form',
               builder: (BuildContext context, GoRouterState state) {
                 return const LeaveForm();
               },
               routes: <RouteBase>[
                 GoRoute(
-                  path: 'new',
+                  path: '/new',
                   builder: (context, state) {
-                    return Demo();
+                    return const Demo();
                   },
                 )
               ]),
           GoRoute(
-            path: 'approve',
+            path: '/approve',
             builder: (BuildContext context, GoRouterState state) {
               return const LeaveApproval();
             },

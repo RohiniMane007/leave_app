@@ -152,7 +152,7 @@ class LeaveForm extends StatelessWidget {
                             foregroundColor: Colors.white,
                             backgroundColor: Colors.teal),
                         onPressed: () {
-                          context.go('/');
+                          context.go('/form/new');
                         },
                         child: const Text("Back")),
                   )),
