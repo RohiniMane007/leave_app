@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:leave_app/leave_approval.dart';
 import 'package:leave_app/leave_form.dart';
 
@@ -26,9 +27,10 @@ class _MenuState extends State<Menu> {
                     backgroundColor: Colors.teal,
                     foregroundColor: Colors.white),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const LeaveForm();
-                  }));
+                  context.go('/form');
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return const LeaveForm();
+                  // }));
                 },
                 child: const Text("Apply")),
             const SizedBox(
@@ -39,9 +41,10 @@ class _MenuState extends State<Menu> {
                     backgroundColor: Colors.teal,
                     foregroundColor: Colors.white),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const LeaveApproval();
-                  }));
+                  context.go('/approve');
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return const LeaveApproval();
+                  // }));
                 },
                 child: const Text("Approve"))
           ],

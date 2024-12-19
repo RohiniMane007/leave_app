@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:leave_app/menu.dart';
+import 'services/approute.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -13,15 +13,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const Menu()
-        // const MyHomePage(title: 'Flutter Demo Home Page'),
-        );
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      routerConfig: AppRoute.router,
+      // home: const Menu()
+
+      // const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
   }
 }
