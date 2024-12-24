@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 enum LeaveMode { half, full, both }
 
@@ -9,13 +8,11 @@ class LeaveForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FocusNode descriptionFocusNode = FocusNode();
-    TextEditingController _dateController =
-        TextEditingController(); // Controller for date field
+    TextEditingController _dateController = TextEditingController();
 
     Future<void> selectDate(BuildContext context) async {
-      // Get the current date
       DateTime currentDate = DateTime.now();
-      // Show the date picker dialog
+
       DateTime? selectedDate = await showDatePicker(
         context: context,
         initialDate: currentDate,
@@ -24,7 +21,6 @@ class LeaveForm extends StatelessWidget {
       );
 
       if (selectedDate != null) {
-        // Format and set the selected date
         _dateController.text =
             "${selectedDate.toLocal()}".split(' ')[0]; // Format as YYYY-MM-DD
       }
@@ -57,11 +53,8 @@ class LeaveForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 10),
-
               const Divider(),
-              // Date Field Section
               const SizedBox(height: 10),
-
               SizedBox(
                 width: 330,
                 child: SegmentedButton<LeaveMode>(
@@ -80,21 +73,14 @@ class LeaveForm extends StatelessWidget {
                   multiSelectionEnabled: true,
                 ),
               ),
-
-              // Leave Mode Section
               const SizedBox(height: 10),
-
               const Divider(),
-              // Date Field Section
               const SizedBox(height: 10),
-
-              // AbsorbPointer(
-
-              //     child:
               TextField(
-                controller: _dateController, // Set the date controller
+                controller: _dateController,
                 readOnly: true,
                 decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.calendar_month),
                   hintText: "Select Dates",
                   border: OutlineInputBorder(),
                   contentPadding:
@@ -104,23 +90,13 @@ class LeaveForm extends StatelessWidget {
                   await selectDate(context);
                 },
               ),
-              ListTile(
-                leading: Checkbox.adaptive(value: false, onChanged: (value) {}),
-                title: const Text(
-                  "Half Day",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                ),
-              ),
-
               const Divider(),
               const Text(
                 "Days : ",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const Divider(),
-
               const SizedBox(height: 20),
-
               TextField(
                 focusNode: descriptionFocusNode,
                 maxLines: 8,
@@ -131,7 +107,6 @@ class LeaveForm extends StatelessWidget {
                       EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 ),
               ),
-
               Align(
                   alignment: Alignment.center,
                   child: Padding(
@@ -143,87 +118,10 @@ class LeaveForm extends StatelessWidget {
                         onPressed: () {},
                         child: const Text("Apply")),
                   )),
-              Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: Colors.teal),
-                        onPressed: () {
-                          context.go('/new');
-                        },
-                        child: const Text("Back")),
-                  )),
             ],
           ),
         ),
       ),
-      /* Container(
-        height: 400,
-        margin: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                RadioMenuButton(
-                    value: false,
-                    groupValue: selectedVal,
-                    onChanged: (v) {
-                      selectedVal = v!;
-                    },
-                    child: const Text("casual")),
-                RadioMenuButton(
-                    value: false,
-                    groupValue: selectedVal,
-                    onChanged: (v) {
-                      selectedVal = v!;
-                    },
-                    child: const Text("sick")),
-                RadioMenuButton(
-                    value: false,
-                    groupValue: selectedVal,
-                    onChanged: (v) {
-                      selectedVal = v!;
-                    },
-                    child: const Text("annual"))
-              ],
-            ),
-            const Divider(),
-            const Text("Leave Mode"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(onPressed: () {}, child: const Text("Half Day")),
-                ElevatedButton(onPressed: () {}, child: const Text("Full Day")),
-                ElevatedButton(
-                    onPressed: () {}, child: const Text("Alternative"))
-              ],
-            ),
-            const TextField(
-              decoration: InputDecoration(
-                  hintText: "Date",
-                  border: InputBorder.none,
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder()),
-            ),
-            const Divider(),
-            const Text("Description"),
-            const TextField(
-              maxLines: 5,
-              decoration: InputDecoration(
-                  hintText: "",
-                  border: InputBorder.none,
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder()),
-            ),
-          ],
-        ),
-      ),*/
     );
   }
 }
